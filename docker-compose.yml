@@ -11,8 +11,5 @@ services:
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf
             - /etc/letsencrypt:/etc/letsencrypt:ro
-            # - volumes_from:
-                # - kzen-container
-                # - ourstory-container
         networks:
             - web_clients
