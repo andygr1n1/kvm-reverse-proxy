@@ -1,0 +1,64 @@
+http {
+
+    # kzen.cloud
+    server {
+        listen 80;
+        listen 443 ssl;
+        server_name kzen.cloud;
+
+        ssl_certificate /etc/letsencrypt/live/kzen.cloud/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/kzen.cloud/privkey.pem;
+
+        return 301 https://www.kzen.cloud$request_uri;
+    }
+
+    server {
+        listen 80;
+        listen 443 ssl;
+        server_name www.kzen.cloud;
+
+        ssl_certificate /etc/letsencrypt/live/kzen.cloud/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/kzen.cloud/privkey.pem;
+
+        location / {
+            proxy_pass http://kzen-container:80;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+
+    # ourstory.cloud
+    #        server {
+    #    listen 80;
+    #   listen 443 ssl;
+    #   server_name ourstory.cloud;
+
+    #  ssl_certificate /etc/letsencrypt/live/ourstory.cloud/fullchain.pem;
+    #  ssl_certificate_key /etc/letsencrypt/live/ourstory.cloud/privkey.pem;
+
+    #  return 301 https://www.ourstory.cloud$request_uri;
+    #}
+
+    # server {
+    #   listen 80;
+    #   listen 443 ssl;
+    #   server_name www.ourstory.cloud;
+
+    #   ssl_certificate /etc/letsencrypt/live/ourstory.cloud/fullchain.pem;
+    #   ssl_certificate_key /etc/letsencrypt/live/ourstory.cloud/privkey.pem;
+
+    #   location / {
+    #       proxy_pass http://ourstory-container:80;
+    #       proxy_set_header Host $host;
+    #       proxy_set_header X-Real-IP $remote_addr;
+    #       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    #       proxy_set_header X-Forwarded-Proto $scheme;
+    #   }
+    #}
+
+    # ================================================================
+}
+
+events {}
