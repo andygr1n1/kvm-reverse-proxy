@@ -11,5 +11,6 @@ services:
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf
             - /etc/letsencrypt:/etc/letsencrypt:ro
+            - /var/www/letsencrypt:/var/www/letsencrypt
         networks:
             - web_clients
