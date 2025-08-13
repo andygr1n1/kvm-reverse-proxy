@@ -1,8 +1,6 @@
 networks:
     web_clients:
         external: true
-    kzen-backend-network-dev:
-        external: true
     kzen-backend-network:
         external: true
 services:
@@ -18,5 +16,6 @@ services:
             - /var/www/letsencrypt:/var/www/letsencrypt
         networks:
             - web_clients
-            - kzen-backend-network-dev
             - kzen-backend-network
+
+
